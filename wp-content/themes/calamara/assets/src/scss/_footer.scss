@@ -1,0 +1,35 @@
+html, body {
+	height: 100%;
+}
+
+@include media-breakpoint-up(sm) {
+	#wrapper {
+		min-height: 100%;
+		position: relative;
+		margin: 0 auto -170px; /* the bottom margin is the negative value of the footer's height */;
+	}
+
+	#main {
+		padding-bottom: 170px;
+	}
+
+	#footer {
+		position: relative;
+		margin: -170px auto 0; /* negative value of footer height */
+		height: 170px;
+		z-index: 2;
+
+		.container {
+			background: url('../images/ctenophore-footer.jpg') no-repeat right bottom;
+		}
+
+		.row {
+			padding-top: 120px;
+		}
+
+		p {
+			margin: 10px 0;
+		}
+	}
+
+}
