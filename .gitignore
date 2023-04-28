@@ -14,7 +14,6 @@ wp-blog-header.php
 wp-comments-post.php
 wp-config-sample.php
 wp-config.php
-wp-content/
 wp-cron.php
 wp-links-opml.php
 wp-load.php
@@ -27,7 +26,7 @@ xmlrpc.php
 
 # ignore everything in the "wp-content" directory, except:
 # "mu-plugins", "plugins", "themes" directory
-wp-content/*
+wp-content/uploads/
 !wp-content/mu-plugins/
 !wp-content/plugins/
 !wp-content/themes/
