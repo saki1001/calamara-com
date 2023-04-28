@@ -3,11 +3,9 @@
  * The template for displaying the archive loop.
  */
 
-calamara_content_nav( 'nav-above' );
-
 if ( have_posts() ) :
 ?>
-	<div class="row">
+	<div class="archive-loop row row-cols-1 row-cols-sm-2 row-cols-md-3">
 	<?php
 		while ( have_posts() ) :
 			the_post();

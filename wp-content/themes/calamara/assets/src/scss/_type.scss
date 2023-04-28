@@ -17,13 +17,20 @@ h1 {
 			font-weight: bold;
 			line-height: 1.2;
 			color: $white;
-			text-shadow: -2px 2px 2px $blue;
+			text-shadow: 1px 1px 3px $blue;
 		}
+	}
+}
+
+#main {
+	.post-navigation .btn {
+		font-size: 14px;
 	}
 }
 
 #sidebar {
 	font-size: 1.1em;
+	line-height: 1.2;
 
 	a {
 		color: $black;
@@ -31,6 +38,10 @@ h1 {
 		&:hover {
 			color: $blue;
 		}
+	}
+
+	figcaption {
+		font-size: 12px;
 	}
 }
 

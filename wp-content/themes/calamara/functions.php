@@ -280,14 +280,9 @@ if ( ! function_exists( 'calamara_article_posted_on' ) ) {
 	 */
 	function calamara_article_posted_on() {
 		printf(
-			wp_kses_post( __( '<span class="sep">Posted on </span><a href="%1$s" title="%2$s" rel="bookmark"><time class="entry-date" datetime="%3$s">%4$s</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author-meta vcard"><a class="url fn n" href="%5$s" title="%6$s" rel="author">%7$s</a></span></span>', 'calamara' ) ),
-			esc_url( get_the_permalink() ),
-			esc_attr( get_the_date() . ' - ' . get_the_time() ),
+			wp_kses_post( __( '<time class="entry-date" datetime="%1$s">%2$s</time>', 'calamara' ) ),
 			esc_attr( get_the_date( 'c' ) ),
-			esc_html( get_the_date() . ' - ' . get_the_time() ),
-			esc_url( get_author_posts_url( (int) get_the_author_meta( 'ID' ) ) ),
-			sprintf( esc_attr__( 'View all posts by %s', 'calamara' ), get_the_author() ),
-			get_the_author()
+			esc_html( get_the_date() )
 		);
 	}
 }
@@ -527,8 +522,9 @@ function calamara_scripts_loader() {
 	$theme_version = wp_get_theme()->get( 'Version' );
 
 	// 1. Styles.
-    wp_enqueue_style( 'slick-css', '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css' );
-    wp_enqueue_style( 'slick-css-theme', '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css' );
+	wp_enqueue_style( 'adobe-fonts', '//use.typekit.net/wwp5jpz.css', array(), $theme_version, 'all' );
+	wp_enqueue_style( 'slick-css', '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css' );
+	wp_enqueue_style( 'slick-css-theme', '//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css' );
 	wp_enqueue_style( 'style', get_theme_file_uri( 'style.css' ), array(), $theme_version, 'all' );
 	wp_enqueue_style( 'main', get_theme_file_uri( 'assets/dist/main.css' ), array(), $theme_version, 'all' ); // main.scss: Compiled Framework source + custom styles.
 
@@ -626,4 +622,50 @@ function calamara_register_custom_taxonomies() {
 add_action( 'init', 'calamara_share_taxonomies_with_posts' );
 function calamara_share_taxonomies_with_posts() {
     register_taxonomy_for_object_type( 'body_of_work', 'artwork' );
+}
+
+/**
+ * Return top-level category for post navigation
+ *
+ * @return void
+ */
+function get_excluded_event_categories() {
+	// Get event categories of current event
+	$current_event_cats = wp_get_post_terms( get_the_ID(), 'body_of_work' );
+	// Declare array to store excluded sub event categories
+	$excluded_sub_event_cats = [];
+	// Loop through current event categories
+	foreach( $current_event_cats as $cat ) {
+		// Check if current category has a parent category
+		$parent_cat = $cat->parent;
+		if($parent_cat !== 0) {
+			// If it does, add it's term ID to the excluded array
+			array_push($excluded_sub_event_cats, $cat->term_id);
+		}
+	}
+	return $excluded_sub_event_cats;
+}
+
+/**
+ * Shortcode for featured image
+ *
+ * @return void
+ */
+add_shortcode('thumbnail', 'thumbnail_in_content');
+function thumbnail_in_content($atts) {
+	global $post;
+
+	return get_the_post_thumbnail($post->ID);
+}
+
+/**
+ * Shortcode for featured image caption
+ *
+ * @return void
+ */
+add_shortcode('thumbnail_caption', 'thumbnail_caption_in_content');
+function thumbnail_caption_in_content($atts) {
+	global $post;
+	$id = get_post_thumbnail_id($post->ID);
+	return '<figcaption>' . wp_get_attachment_caption($id) . '</figcaption>';
 }

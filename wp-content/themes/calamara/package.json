@@ -16,8 +16,8 @@
     "last 2 versions"
   ],
   "dependencies": {
-    "bootstrap": "^5.2.0",
     "@popperjs/core": "^2.11.6",
+    "bootstrap": "^5.2.0",
     "jquery": "^3.6.0"
   },
   "devDependencies": {
@@ -29,7 +29,7 @@
     "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^3.0.0",
     "postcss": "^8.4.16",
-    "sass": "^1.54.5",
+    "sass": "^1.62.1",
     "webpack": "^5.74.0",
     "webpack-stream": "^7.0.0"
   }

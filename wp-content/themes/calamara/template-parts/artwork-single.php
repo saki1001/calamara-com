@@ -14,7 +14,7 @@
 		$slides = get_field('gallery');
 		if ( !empty($slides) ) :
 	?>
-		<div id="gallery" class="carousel carousel-dark slide" data-bs-ride="carousel">
+		<div id="gallery" class="carousel carousel-dark carousel-fade slide" data-bs-ride="carousel">
 			<div class="carousel-indicators">
 			<?php
 				foreach ( $slides as $key => $slide ) :
@@ -27,8 +27,14 @@
 			<?php
 				foreach ( $slides as $key => $slide ) :
 					$active = $key === 0 ? ' active' : '';
+					$image = get_post($slide['ID']);
 					echo '<div class="carousel-item' . $active . '">';
+					echo '<div class="figure-wrapper">';
+					echo '<figure>';
 					echo wp_get_attachment_image( $slide['ID'], 'large' );
+					echo '</figure>';
+					echo '</div>';
+					echo '<figcaption>' . $image->post_content . '</figcaption>';
 					echo '</div>';
 				endforeach;
 			?>

@@ -23,14 +23,16 @@ the_post();
 					while ( $loop->have_posts() ) :
 						$loop->the_post();
 						$postID = get_the_id();
-						$image = get_field('featured_image');
+//						$image = get_field('featured_image');
+						$image = get_the_post_thumbnail(get_post($postID));
 						$size = 'thumbnail';
 				?>
 						<div class="col artwork">
 							<figure>
 							<?php
 								if( $image ) {
-									echo wp_get_attachment_image( $image, $size, '', ['class' => 'd-block w-100'] );
+//									echo wp_get_attachment_image( $image, $size, '', ['class' => 'd-block w-100'] );
+									echo $image;
 								}
 							?>
 								<figcaption>

@@ -21,3 +21,8 @@ node_modules/
 *.log
 *.sql
 *.sqlite
+
+# Local files
+.DS_Store
+.idea
+.editorconfig

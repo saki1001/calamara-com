@@ -107,6 +107,11 @@ img {
 	margin-top: ($grid-gutter-width * .5);
 }
 
+.entry-title,
+.page-title {
+	margin-bottom: 16px;
+}
+
 .single {
 	.entry-content,
 	.post-navigation,

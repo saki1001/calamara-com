@@ -23,9 +23,10 @@ wp_reset_postdata();
 $count_posts = wp_count_posts();
 
 if ( $count_posts->publish > '1' ) :
-	$next_post = get_next_post();
-	$prev_post = get_previous_post();
-?>
+	$taxonomy = is_singular('artwork') ? 'body_of_work' : 'category';
+	$next_post = get_next_post(true, '', $taxonomy);
+	$prev_post = get_previous_post(true, '', $taxonomy);
+	?>
 <hr class="mt-5">
 <div class="post-navigation d-flex justify-content-between">
 	<?php
