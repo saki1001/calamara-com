@@ -13,11 +13,19 @@ h1 {
 .artwork{
 	figcaption {
 		a {
-			font-size: 1.4em;
+			font-size: 0;
 			font-weight: bold;
 			line-height: 1.2;
 			color: $white;
 			text-shadow: 1px 1px 3px $blue;
+		}
+	}
+
+	&:hover {
+		figcaption {
+			a {
+				font-size: 1.4em;
+			}
 		}
 	}
 }
