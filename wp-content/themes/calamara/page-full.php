@@ -11,8 +11,12 @@ the_post();
 ?>
 <div class="row">
 	<div id="post-<?php the_ID(); ?>" <?php post_class( 'content col-md-12' ); ?>>
-		<h1 class="entry-title"><?php the_title(); ?></h1>
 		<?php
+			if( !is_front_page() ) :
+		?>
+			<h1 class="entry-title"><?php the_title(); ?></h1>
+		<?php
+			endif;
 			the_content();
 
 			wp_link_pages(
