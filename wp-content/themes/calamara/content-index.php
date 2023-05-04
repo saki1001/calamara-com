@@ -14,7 +14,7 @@
 			?>
 			<div class="card-body">
 				<div class="card-text entry-content">
-					<p><?php the_date(); ?></p>
+					<p><?php echo get_the_date(); ?></p>
 					<h3><?php the_title(); ?></h3>
 				</div><!-- /.card-text -->
 			</div><!-- /.card-body -->
